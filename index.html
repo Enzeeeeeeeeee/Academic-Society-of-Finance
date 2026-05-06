@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Society of Finance e.V.</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'asf-navy': '#1a237e',
+                        'asf-blue': '#283593',
+                        'asf-red': '#b71c1c',
+                        'asf-purple': '#6a1b9a',
+                    },
+                    fontFamily: {
+                        'display': ['Plus Jakarta Sans', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --asf-primary: #1a237e;
+            --asf-accent: #283593;
+            --asf-red: #b71c1c;
+            --asf-purple: #6a1b9a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+        
+        /* Page System */
+        .page { display: none; opacity: 0; transition: opacity 0.5s ease; }
+        .page.active { display: block; opacity: 1; }
+        
+        /* ==================== LIGHT HERO DESIGN ==================== */
+        .hero-light {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #ffffff 0%, #faf9f6 50%, #f5f3ef 100%);
+            overflow: hidden;
+        }
+        
+        .geo-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.4;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(26, 35, 126, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(106, 27, 154, 0.06) 0%, transparent 50%);
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        .shape-1 { width: 400px; height: 400px; top: -10%; right: -5%; background: linear-gradient(135deg, rgba(26, 35, 126, 0.06), rgba(40, 53, 147, 0.04)); animation-delay: 0s; }
+        .shape-2 { width: 300px; height: 300px; bottom: 10%; left: -5%; background: linear-gradient(135deg, rgba(106, 27, 154, 0.05), rgba(183, 28, 28, 0.03)); animation-delay: -3s; }
+        .shape-3 { width: 200px; height: 200px; top: 40%; right: 15%; background: linear-gradient(135deg, rgba(26, 35, 126, 0.05), transparent); animation-delay: -5s; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        
+        @keyframes morph {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; transform: rotate(5deg) scale(1.02); }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; transform: rotate(-3deg) scale(1); }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; transform: rotate(-5deg) scale(0.98); }
+        }
+        
+        .grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(26, 35, 126, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(26, 35, 126, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
+        }
+        
+        .logo-showcase { position: relative; display: flex; align-items: center; justify-content: center; }
+        
+        .logo-ring {
+            position: absolute; border-radius: 50%;
+            border: 2px solid rgba(26, 35, 126, 0.1);
+            animation: pulse-ring 3s ease-out infinite;
+        }
+        .logo-ring:nth-child(1) { width: 280px; height: 280px; animation-delay: 0s; }
+        .logo-ring:nth-child(2) { width: 340px; height: 340px; animation-delay: 1s; }
+        .logo-ring:nth-child(3) { width: 400px; height: 400px; animation-delay: 2s; }
+        
+        @keyframes pulse-ring { 0% { transform: scale(0.95); opacity: 1; } 100% { transform: scale(1.1); opacity: 0; } }
+        
+        .logo-main { position: relative; z-index: 10; filter: drop-shadow(0 20px 40px rgba(26, 35, 126, 0.15)); animation: logo-float 6s ease-in-out infinite; }
+        @keyframes logo-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        
+        .price-badge {
+            position: relative; background: white;
+            box-shadow: 0 4px 6px rgba(26, 35, 126, 0.07), 0 10px 40px rgba(26, 35, 126, 0.1);
+            overflow: hidden;
+        }
+        .price-badge::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--asf-red), var(--asf-purple), var(--asf-primary));
+        }
+        
+        .feature-pill {
+            background: white; border: 1px solid rgba(26, 35, 126, 0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-pill:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(26, 35, 126, 0.12); border-color: var(--asf-primary); }
+        
+        .btn-primary-new {
+            position: relative; background: var(--asf-primary); color: white;
+            overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 14px rgba(26, 35, 126, 0.25);
+        }
+        .btn-primary-new::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        .btn-primary-new:hover::before { left: 100%; }
+        .btn-primary-new:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(26, 35, 126, 0.35); }
+        
+        .btn-secondary-new { background: transparent; color: var(--asf-primary); border: 2px solid var(--asf-primary); transition: all 0.3s ease; }
+        .btn-secondary-new:hover { background: var(--asf-primary); color: white; }
+        
+        .stat-card {
+            position: relative; background: white; border-left: 4px solid var(--asf-primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: all 0.3s ease;
+        }
+        .stat-card:hover { transform: translateX(8px); box-shadow: 0 8px 30px rgba(26, 35, 126, 0.1); }
+        
+        .nav-light {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 35, 126, 0.08);
+            box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+        }
+        
+        /* FIX: Navigation Links - Working Version */
+        .nav-link-light { 
+            position: relative; 
+            color: #334155; 
+            font-weight: 500; 
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-link-light::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--asf-primary); transition: width 0.3s ease;
+        }
+        .nav-link-light:hover { color: var(--asf-primary); }
+        .nav-link-light:hover::after { width: 100%; }
+        .nav-link-light.active { color: var(--asf-primary); }
+        .nav-link-light.active::after { width: 100%; }
+        
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .mobile-menu.active { transform: translateX(0); }
+        
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px);
+            z-index: 100; display: none; align-items: center; justify-content: center;
+            padding: 1rem; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .modal-content {
+            background: white; border-radius: 24px; max-width: 600px; width: 100%;
+            max-height: 90vh; overflow-y: auto;
+            transform: scale(0.9) translateY(20px); transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        
+        .form-input {
+            width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0;
+            border-radius: 12px; font-size: 16px; font-family: inherit; transition: all 0.3s ease;
+        }
+        .form-input:focus { outline: none; border-color: var(--asf-primary); box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1); }
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 12px center; background-size: 20px; padding-right: 44px;
+        }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        
+        .benefit-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
+        }
+        .benefit-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--asf-primary), var(--asf-purple));
+            transform: scaleX(0); transition: transform 0.4s ease;
+        }
+        .benefit-card:hover::before { transform: scaleX(1); }
+        .benefit-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(26, 35, 126, 0.15); }
+        
+        .pyramid-level { transition: all 0.3s ease; cursor: pointer; }
+        .pyramid-level:hover { filter: brightness(1.08); transform: scale(1.02); }
+        
+        .team-card { transition: all 0.4s ease; }
+        .team-card:hover { transform: translateY(-10px); }
+        .team-card:hover .team-img { transform: scale(1.05); }
+        .team-img { transition: transform 0.4s ease; }
+        
+        .partner-logo { 
+            filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;
+            object-fit: contain;
+        }
+        .partner-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+        
+        .event-card { transition: all 0.4s ease; }
+        .event-card:hover { transform: scale(1.02); }
+        
+        .academy-module { transition: all 0.4s ease; cursor: pointer; }
+        .academy-module:hover { transform: translateX(15px); box-shadow: -10px 10px 30px -10px rgba(26, 35, 126, 0.2); }
+        
+        .wikifolio-container {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 24px; overflow: hidden; position: relative;
+        }
+        .wikifolio-container::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(106, 27, 154, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(26, 35, 126, 0.15) 0%, transparent 50%);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- NAVIGATION - Fix für alle Links! -->
+<!-- ============================================ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16 md:h-20">
+            
+            <!-- Logo (klickt zur Home Page) -->
+            <a onclick="showPage('home')" class="flex items-center gap-3 group cursor-pointer">
+                <!-- HIER DEIN LOGO - Einfach URL unten austauschen! -->
+                <img src="https://raw.githubusercontent.com/Enzeeeeeeeeee/ASF.github.io/main/logo.png" alt="ASF Logo" class="h-10 w-auto group-hover:scale-105 transition-transform duration-300">
+                <span class="font-display font-bold text-lg text-gray-900 hidden sm:block">ASF e.V.</span>
+            </a>
+            
+            <!-- Desktop Menu - Alle Links funktionieren jetzt! -->
+            <div class="hidden md:flex items-center gap-8">
+                <a onclick="showPage('home')" href="#homePage" class="nav-link-light active">Home</a>
+                <a onclick="showPage('home')" href="#about" class="nav-link-light">Über uns</a>
+                <a onclick="showPage('home')" href="#community" class="nav-link-light">Community</a>
+				<a onclick="showPage('home')" href="#bvh" class="nav-link-light">Die BVH</a>
+                <a onclick="showPage('home')" href="#events" class="nav-link-light">Events</a>
+                <a onclick="showPage('home')" href="#team" class="nav-link-light">Team</a>
+                <a onclick="showPage('home')" href="#wikifolio" class="nav-link-light">Portfolio</a>
+				<a onclick="showPage('academy')" class="nav-link-light active">Academy</a>
+                <button onclick="openModal('membershipModal')" class="btn-primary-new px-6 py-2.5 rounded-full text-sm font-semibold cursor-pointer">Mitglied werden</button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="Menu öffnen">
+                <i class="fas fa-bars text-xl text-gray-700"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white shadow-2xl z-50 p-6">
+    <button id="closeMenuBtn" class="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100" aria-label="Menu schließen">
+        <i class="fas fa-times text-xl text-gray-600"></i>
+    </button>
+    <div class="mt-12 flex flex-col gap-6">
+        <a onclick="showPage('home'); closeMobileMenu();" class="text-lg font-medium text-gray-900 hover:text-asf-navy cursor-pointer">Home</a>
+        <a href="#about" onclick="closeMobileMenu();" class="text-lg font-medium text-gray-700 hover:text-asf-navy cursor-pointer">Über uns</a>
+        <a href="#community" onclick="closeMobileMenu();" class="text-lg font-medium text-gray-700 hover:text-asf-navy cursor-pointer">Community</a>
+		<a href="#bvh" onclick="closeMobileMenu();" class="text-lg font-medium text-gray-700 hover:text-asf-navy cursor-pointer">Die BVH</a>
+        <a href="#events" onclick="closeMobileMenu();" class="text-lg font-medium text-gray-700 hover:text-asf-navy cursor-pointer">Events</a>
+        <a href="#team" onclick="closeMobileMenu();" class="text-lg font-medium text-gray-700 hover:text-asf-navy cursor-pointer">Team</a>
+        <a href="#wikifolio" onclick="closeMobileMenu();" class="text-lg font-medium text-gray-700 hover:text-asf-navy cursor-pointer">Portfolio</a>
+		<a onclick="showPage('academy'); closeMobileMenu();" class="text-lg font-medium text-gray-700 hover:text-asf-navy cursor-pointer">Academy</a>
+        <button onclick="openModal('membershipModal'); closeMobileMenu();" class="btn-primary-new w-full py-3 rounded-xl text-white font-semibold mt-4 cursor-pointer">Mitglied werden</button>
+    </div>
+</div>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="homePage" class="page active">
+
+    <!-- HERO SECTION -->
+    <section class="hero-light flex items-center relative pt-20">
+        <div class="geo-pattern"></div>
+        <div class="grid-lines"></div>
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <!-- Left Content -->
+                <div class="space-y-8 order-2 lg:order-1">
+                    
+                    <!-- Trust Badge -->
+                    <div class="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm border border-gray-100">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-sm font-medium text-gray-600">200+ aktive Mitglieder | 15+ Studiengänge</span>
+                    </div>
+                    
+                    <!-- Main Headline -->
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-[1.1] tracking-tight">
+                        Deine Finanzkarriere.<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-asf-navy via-asf-blue to-asf-purple">Gemeinsam aufgebaut.</span>
+                    </h1>
+                    
+                    <!-- Subheadline -->
+                    <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg">
+                        Werde Teil der größten Finance-Community an deiner Hochschule. Events, Netzwerk, Wissen – alles für <strong class="text-gray-900">2 € pro Monat</strong>.
+                    </p>
+                    
+                    <!-- Price Highlight Box -->
+                    <div class="price-badge inline-flex items-center gap-4 px-6 py-4 rounded-2xl">
+                        <div class="text-center">
+                            <div class="font-display text-3xl font-bold text-asf-navy">2 €</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">pro Monat</div>
+                        </div>
+                        <div class="w-px h-12 bg-gray-200"></div>
+                        <div class="text-sm text-gray-600">
+                            <div class="font-semibold text-gray-900">Monatliche SEPA</div>
+                            <div class="text-xs text-gray-500">Jederzeit kündbar</div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="openModal('membershipModal')" class="btn-primary-new px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fas fa-arrow-right"></i> Jetzt Mitglied werden
+                        </button>
+                        <a href="#community" class="btn-secondary-new px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2">Mehr erfahren</a>
+                    </div>
+                    
+                    <!-- Quick Features -->
+                    <div class="flex flex-wrap gap-3 pt-4">
+                        <span class="feature-pill px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> BVH Zugang</span>
+                        <span class="feature-pill px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Exklusive Events</span>
+                        <span class="feature-pill px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> ASF Academy</span>
+						<span class="feature-pill px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Netzwerk & Community</span>
+                        <span class="feature-pill px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center gap-2"><i class="fas fa-chart-line text-asf-purple"></i> wikifolio Portfolio</span>
+                    </div>
+                </div>
+                
+                <!-- Right Visual - Logo Showcase -->
+                <div class="order-1 lg:order-2 flex justify-center items-center">
+                    <div class="logo-showcase relative">
+                        <div class="logo-ring"></div><div class="logo-ring"></div><div class="logo-ring"></div>
+                        
+                        <!-- LOGO BILD - Hier ist deine URL! -->
+                        <img src="https://raw.githubusercontent.com/Enzeeeeeeeeee/ASF.github.io/main/logo.png" 
+                             alt="ASF Academic Society of Finance Logo" 
+                             class="logo-main w-56 h-56 md:w-72 md:h-72 object-contain">
+                        
+                        <!-- Floating Info Tags -->
+                        <div class="absolute -top-2 -right-2 md:-right-8 bg-white rounded-2xl shadow-lg p-3 z-20 animate-bounce" style="animation-duration: 3s;">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-asf-navy/10 rounded-lg flex items-center justify-center"><i class="fas fa-users text-asf-navy text-sm"></i></div>
+                                <div><div class="text-xs font-bold text-gray-900">200+</div><div class="text-[10px] text-gray-500">Mitglieder</div></div>
+                            </div>
+                        </div>
+						
+						
+						<div class="absolute -top-[-10%] -left-2 md:-left-12 bg-white rounded-2xl shadow-lg p-3 z-20 animate-bounce" style="animation-duration: 2s;">
+							<div class="flex items-center gap-2">
+								<div class="w-8 h-8 bg-asf-red/10 rounded-lg flex items-center justify-center"><i class="fas fa-microphone text-asf-red text-sm"></i></div>
+								<div><div class="text-xs font-bold text-gray-900">Vor Ort</div><div class="text-[10px] text-gray-500">Vorträge & Talks</div></div>
+							</div>
+						</div>
+						
+						
+                        
+                        <div class="absolute -bottom-2 -left-2 md:-left-8 bg-white rounded-2xl shadow-lg p-3 z-20 animate-bounce" style="animation-duration: 4s;">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-asf-purple/10 rounded-lg flex items-center justify-center"><i class="fas fa-graduation-cap text-asf-purple text-sm"></i></div>
+                                <div><div class="text-xs font-bold text-gray-900">15+</div><div class="text-[10px] text-gray-500">Studiengänge</div></div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute top-1/2 -right-12 bg-white rounded-2xl shadow-lg p-3 z-20 hidden lg:block animate-bounce" style="animation-duration: 5s;">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center"><i class="fas fa-chart-line text-green-600 text-sm"></i></div>
+                                <div><div class="text-xs font-bold text-gray-900">Live</div><div class="text-[10px] text-gray-500">wikifolio</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Bar -->
+            <div class="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
+                <div class="stat-card rounded-xl p-6"><div class="font-display text-3xl font-bold text-asf-navy">200+</div><div class="text-sm text-gray-500 mt-1">Aktive Mitglieder</div></div>
+                <div class="stat-card rounded-xl p-6"><div class="font-display text-3xl font-bold text-asf-purple">15+</div><div class="text-sm text-gray-500 mt-1">Studiengänge</div></div>
+                <div class="stat-card rounded-xl p-6"><div class="font-display text-3xl font-bold text-asf-blue">12</div><div class="text-sm text-gray-500 mt-1">Events pro Jahr</div></div>
+                <div class="stat-card rounded-xl p-6"><div class="font-display text-3xl font-bold text-green-600">2€</div><div class="text-sm text-gray-500 mt-1">Pro Monat</div></div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-gray-400 text-xs uppercase tracking-widest font-medium">Mehr entdecken</span>
+            <i class="fas fa-chevron-down text-gray-400"></i>
+        </div>
+    </section>
+
+    <!-- ==================== ÜBER UNS / VORTEILE SECTION ==================== -->
+    <section id="about" class="py-24 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="inline-block text-asf-navy font-semibold text-sm uppercase tracking-widest mb-4">Warum ASF?</span>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Mehr als nur ein Finance Club</h2>
+                <p class="text-lg text-gray-600">Wir verbinden akademische Exzellenz mit praktischer Erfahrung. Als Mitglied des Bundesverbandes der Börsenvereine eröffnen wir dir Türen zur Finanzwelt.</p>
+            </div>
+            
+            <!-- 6 Benefit Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: BVH Mitgliedschaft -->
+                <div class="benefit-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 reveal">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-building-columns text-2xl text-asf-navy"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-900 mb-3">BVH Mitgliedschaft</h3>
+                    <p class="text-gray-600 leading-relaxed">Zugang auf Kurse, Zertifikate (CFS, Börsenführerschein) und Fachzeitschriften wie Capital & Financial Times.</p>
+                </div>
+                
+                <!-- Card 2: Exklusive Events -->
+                <div class="benefit-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 reveal" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-microphone text-2xl text-asf-purple"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-900 mb-3">Exklusive Events</h3>
+                    <p class="text-gray-600 leading-relaxed">Vorträge von Branchenexperten, Firmenvorstellungen und regelmäßige Stammtische zum Networking.</p>
+                </div>
+                
+                <!-- Card 3: Taskforces -->
+                <div class="benefit-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 reveal" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-hand-fist text-2xl text-asf-red"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-900 mb-3">Get Involved</h3>
+                    <p class="text-gray-600 leading-relaxed">Engagiere dich in unseren Taskforces, sammle Praxiserfahrung und gestalte aktiv die Zukunft unseres Clubs.</p>
+                </div>
+                
+                <!-- Card 4: Karriere Network -->
+                <div class="benefit-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 reveal" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-network-wired text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-900 mb-3">Karrierenetwork</h3>
+                    <p class="text-gray-600 leading-relaxed">Kontakte zu Alumni und Partnern wie UBS, PwC, BlackRock und Goldman Sachs für deinen Berufseinstieg.</p>
+                </div>
+                
+                <!-- Card 5: ASF Academy -->
+                <div class="benefit-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 reveal" style="transition-delay: 0.4s;">
+                    <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-900 mb-3">ASF Academy</h3>
+                    <p class="text-gray-600 leading-relaxed">Grundlagenwissen Finance für alle – von Aktien über Anleihen bis hin zu Derivaten, verständlich erklärt.</p>
+                </div>
+                
+                <!-- Card 6: wikifolio Portfolio -->
+                <div class="benefit-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 reveal" style="transition-delay: 0.5s;">
+                    <div class="w-14 h-14 bg-cyan-50 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-pie text-2xl text-cyan-600"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-900 mb-3">wikifolio Portfolio</h3>
+                    <p class="text-gray-600 leading-relaxed">Unser aktives Investment-Portfolio – lerne Investieren durch echte Praxis und folge unseren Trades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COMMUNITY PYRAMIDE SECTION ==================== -->
+    <section id="community" class="py-24 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="inline-block text-asf-blue font-semibold text-sm uppercase tracking-widest mb-4">Community Struktur</span>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Die ASF Community Pyramide</h2>
+                <p class="text-lg text-gray-600">Von passivem Netzwerk bis aktiver Gestaltung – finde dein Engagement-Level.</p>
+            </div>
+            
+            <!-- Pyramid Visualization -->
+            <div class="flex flex-col items-center gap-4 max-w-4xl mx-auto reveal">
+                
+                <!-- Level 4: Network (Top) -->
+                <div class="pyramid-level w-full max-w-[16rem] bg-gradient-to-b from-indigo-300 to-indigo-400 rounded-t-3xl rounded-b-3xl px-8 py-6 text-center cursor-pointer">
+                    <h4 class="font-display font-bold text-white text-xl mb-1">Network</h4>
+                    <p class="text-indigo-100 text-sm">Kontakte knüpfen & pflegen</p>
+                </div>
+                
+                <!-- Level 3: BVH -->
+                <div class="pyramid-level w-full max-w-sm bg-gradient-to-b from-indigo-400 to-blue-600 rounded-t-3xl rounded-b-3xl px-8 py-6 text-center">
+                    <h4 class="font-display font-bold text-white text-xl mb-1">BVH Vorteile</h4>
+                    <p class="text-blue-100 text-sm">Kurse + Finanzzeitschriften (6+) + Events</p>
+                </div>
+                
+                <!-- Level 2: Events -->
+                <div class="pyramid-level w-full max-w-xl bg-gradient-to-b from-blue-600 to-asf-blue rounded-t-3xl rounded-b-3xl px-8 py-6 text-center">
+                    <h4 class="font-display font-bold text-white text-xl mb-1">Events</h4>
+                    <p class="text-blue-200 text-sm">Speaker Vorträge + Talks + regelmäßiger Stammtisch</p>
+                </div>
+                
+                <!-- Level 1: Taskforces (Bottom) -->
+                <div class="pyramid-level w-full max-w-3xl bg-gradient-to-b from-asf-blue to-slate-900 rounded-t-3xl rounded-b-3xl px-8 py-6 text-center">
+                    <h4 class="font-display font-bold text-white text-xl mb-1">Taskforces</h4>
+                    <p class="text-slate-300">Get involved! Shape the future of a rising club @ DHBW</p>
+                </div>
+            </div>
+            
+            <!-- Taskforce Cards Detail -->
+            <div class="grid md:grid-cols-3 gap-8 mt-16">
+                <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-yellow-500 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-share-nodes text-xl text-yellow-600"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-lg">Social Media</h4>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Kanalverwaltung & Content</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Follower Tracking & Optimierung</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Externe Kommunikation</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-teal-500 reveal" style="transition-delay: 0.1s;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-calendar-check text-xl text-teal-600"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-lg">Event & Netzwerk</h4>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Planung & Organisation</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Speaker Akquise & Betreuung</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Stammtisch Koordination</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-asf-red reveal" style="transition-delay: 0.2s;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-user-tie text-xl text-asf-red"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-lg">Internes Management</h4>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Onboarding & Mitgliederbetreuung</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Tracking & Verwaltung</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Interne Projekte leiten</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BVH PARTNER SECTION ==================== -->
+    <section id="bvh" class="py-24 md:py-28 bg-asf-navy text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-asf-purple rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-asf-blue rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <a href="https://bvh.org/homepage/" target="_blank" rel="noopener noreferrer" 
+				   class="inline-flex items-center gap-3 bg-white/10 backdrop-blur px-6 py-3 rounded-full mb-6 
+						  hover:bg-white/20 transition-colors cursor-pointer text-white no-underline">
+					<i class="fas fa-building-columns text-2xl"></i>
+					<span class="font-semibold">Bundesverband der Börsenvereine an deutschen Hochschulen e.V.</span>
+				</a>
+                <h2 class="font-display text-3xl md:text-5xl font-bold mb-6">Unser Dachverband: Der BVH</h2>
+                <p class="text-lg text-blue-200">Als ASF-Mitglied profitierst du vom gesamten BVH-Netzwerk mit über 70 Hochschulvereinen und 55 Partnern.</p>
+            </div>
+            
+            <!-- Partner Logos Grid - EASY SWAP PLACEHOLDERS! -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16 reveal">
+                
+                <!-- Partner 1: UBS - Ersetze src mit deiner Raw-URL! -->
+                <div class="bg-white rounded-xl p-4 flex items-center justify-center h-24 partner-logo">
+                    <img src="https://via.placeholder.com/120x60/f8f9fa/1e293b?text=UBS&font=Montserrat:bold" 
+                         alt="UBS Logo" class="max-h-12 w-auto object-contain">
+                </div>
+                
+                <!-- Partner 2: PwC -->
+                <div class="bg-white rounded-xl p-4 flex items-center justify-center h-24 partner-logo">
+                    <img src="https://via.placeholder.com/120x60/f8f9fa/1e293b?text=PwC&font=Montserrat:bold" 
+                         alt="PwC Logo" class="max-h-12 w-auto object-contain">
+                </div>
+                
+                <!-- Partner 3: BlackRock -->
+                <div class="bg-white rounded-xl p-4 flex items-center justify-center h-24 partner-logo">
+                    <img src="https://via.placeholder.com/120x60/f8f9fa/1e293b?text=BlackRock&font=Montserrat:bold" 
+                         alt="BlackRock Logo" class="max-h-12 w-auto object-contain">
+                </div>
+                
+                <!-- Partner 4: Goldman Sachs -->
+                <div class="bg-white rounded-xl p-4 flex items-center justify-center h-24 partner-logo">
+                    <img src="https://via.placeholder.com/120x60/f8f9fa/1e293b?text=Goldman+Sachs&font=Montserrat:bold" 
+                         alt="Goldman Sachs Logo" class="max-h-12 w-auto object-contain">
+                </div>
+                
+                <!-- Partner 5: KPMG -->
+                <div class="bg-white rounded-xl p-4 flex items-center justify-center h-24 partner-logo">
+                    <img src="https://via.placeholder.com/120x60/f8f9fa/1e293b?text=KPMG&font=Montserrat:bold" 
+                         alt="KPMG Logo" class="max-h-12 w-auto object-contain">
+                </div>
+                
+                <!-- Partner 6: Accenture -->
+                <div class="bg-white rounded-xl p-4 flex items-center justify-center h-24 partner-logo">
+                    <img src="https://via.placeholder.com/120x60/f8f9fa/1e293b?text=Accenture&font=Montserrat:bold" 
+                         alt="Accenture Logo" class="max-h-12 w-auto object-contain">
+                </div>
+            </div>
+            
+            <!-- BVH Benefits Split -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10 reveal">
+                    <h3 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                        <i class="fas fa-certificate text-yellow-400"></i> BVH-Mitgliedskurse
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3"><i class="fas fa-circle-check text-green-400 mt-1"></i><span>CFS (Certified Finance Student)</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-circle-check text-green-400 mt-1"></i><span>Börsenführerschein</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-circle-check text-green-400 mt-1"></i><span>Jährliche BVH-Konferenz</span></li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10 reveal" style="transition-delay: 0.1s;">
+                    <h3 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                        <i class="fas fa-newspaper text-blue-400"></i> BVH-Zeitschriftenangebot
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3"><i class="fas fa-circle-check text-green-400 mt-1"></i><span>Capital Magazin</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-circle-check text-green-400 mt-1"></i><span>Focus Money</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-circle-check text-green-400 mt-1"></i><span>Euro am Sonntag</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-circle-check text-green-400 mt-1"></i><span>Financial Times</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== EVENTS SECTION ==================== -->
+    <section id="events" class="py-24 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="inline-block text-asf-red font-semibold text-sm uppercase tracking-widest mb-4">Events & Aktivitäten</span>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Das organisieren wir</h2>
+                <p class="text-lg text-gray-600">Von fachlichen Vorträgen bis zum lockeren Stammtisch – bei uns ist immer was los.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                
+                <!-- Featured Event Card -->
+                <div class="event-card bg-gradient-to-br from-asf-purple to-purple-700 rounded-3xl p-8 text-white reveal lg:row-span-2">
+                    <div class="flex items-center gap-2 text-purple-200 text-sm font-semibold mb-4">
+                        <i class="fas fa-calendar"></i><span>Nächstes Highlight Event</span>
+                    </div>
+                    <h3 class="font-display text-2xl md:text-3xl font-bold mb-4">Psychologie an der Börse</h3>
+                    <p class="text-purple-100 mb-6 leading-relaxed">Warum Märkte menschlicher sind, als wir denken. Ein faszinierender Einblick in Behavioral Finance mit Dr. Moritz Hagen (digatus).</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-location-dot"></i></div>
+                            <div><div class="text-sm text-purple-200">Ort</div><div class="font-semibold">Marktstraße 28, Raum 409</div></div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-clock"></i></div>
+                            <div><div class="text-sm text-purple-200">Zeit</div><div class="font-semibold">23.01.2025, 19:30 - 21:00</div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 pt-6 border-t border-white/20">
+                        
+                        <div><div class="font-bold">Dr. Moritz Hagen</div><div class="text-sm text-purple-200">Manager Organizational Development @ digatus</div></div>
+                    </div>
+                </div>
+                
+                <!-- Event Types List -->
+                <div class="space-y-6">
+                    
+                    <div class="event-card bg-gray-50 rounded-2xl p-6 reveal" style="transition-delay: 0.1s;">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-asf-navy/10 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-chalkboard-teacher text-asf-navy text-xl"></i></div>
+                            <div>
+                                <h4 class="font-display font-bold text-lg text-gray-900 mb-2">Vorträge & Talks</h4>
+                                <p class="text-gray-600 text-sm">Experten aus der Industrie teilen ihr Wissen über Börse, Finanzmärkte und Karrierewege.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card bg-gray-50 rounded-2xl p-6 reveal" style="transition-delay: 0.2s;">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-asf-purple/10 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-users text-asf-purple text-xl"></i></div>
+                            <div>
+                                <h4 class="font-display font-bold text-lg text-gray-900 mb-2">Stammtisch</h4>
+                                <p class="text-gray-600 text-sm">Regelmäßige lockere Runden zum Austausch über aktuelle Themen – Sonntagabends via MS Teams.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card bg-gray-50 rounded-2xl p-6 reveal" style="transition-delay: 0.3s;">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-asf-red/10 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-video text-asf-red text-xl"></i></div>
+                            <div>
+                                <h4 class="font-display font-bold text-lg text-gray-900 mb-2">Interviews</h4>
+                                <p class="text-gray-600 text-sm">Einblicke in Berufe und Karrieren in Bereichen Finance und Business.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card bg-gradient-to-r from-asf-navy to-asf-blue rounded-2xl p-6 text-white reveal" style="transition-delay: 0.4s;">
+                        <div class="flex items-center justify-between">
+                            <div><h4 class="font-display font-bold text-lg mb-1">Alle Events sehen</h4><p class="text-blue-100 text-sm">Vergangene und kommende Termine</p></div>
+                            <i class="fas fa-arrow-right text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TEAM SECTION ==================== -->
+    <section id="team" class="py-24 md:py-32 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="inline-block text-asf-navy font-semibold text-sm uppercase tracking-widest mb-4">Das sind Wir</span>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Unser Vorstand</h2>
+                <p class="text-lg text-gray-600">Engagierte Studierende mit Leidenschaft für Finance – hier um dich willkommen zu heißen.</p>
+            </div>
+            
+            <!-- Team Grid - 5 Members -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+                
+                <!-- Member 1: Paul Graser -->
+                <div class="team-card reveal">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-square overflow-hidden bg-gray-100">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23e2e8f0' width='300' height='300'/%3E%3Ccircle cx='150' cy='120' r='50' fill='%23cbd5e1'/%3E%3Cpath d='M70 280 Q150 220 230 280' fill='%23cbd5e1'/%3E%3C/svg%3E" alt="Paul Graser" class="team-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="font-display font-bold text-gray-900">Paul Gräser</h4>
+                            <p class="text-xs text-asf-navy font-semibold uppercase tracking-wide mb-1">Vorstandsvorsitzender</p>
+                            <p class="text-xs text-gray-500">BWL Bank | First Fugger Privatbank</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Member 2: Enzo Biasia -->
+                <div class="team-card reveal" style="transition-delay: 0.1s;">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-square overflow-hidden bg-gray-100">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23fef3c7' width='300' height='300'/%3E%3Ccircle cx='150' cy='120' r='50' fill='%23fcd34d'/%3E%3Cpath d='M70 280 Q150 220 230 280' fill='%23fcd34d'/%3E%3C/svg%3E" alt="Enzo Biasia" class="team-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="font-display font-bold text-gray-900">Enzo Biasia</h4>
+                            <p class="text-xs text-asf-navy font-semibold uppercase tracking-wide mb-1">Stellv. Vorsitzender</p>
+                            <p class="text-xs text-gray-500">BWL Bank | Bayerische Landesbank</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Member 3: Laurenz Polanski -->
+                <div class="team-card reveal" style="transition-delay: 0.2s;">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-square overflow-hidden bg-gray-100">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23d1fae5' width='300' height='300'/%3E%3Ccircle cx='150' cy='120' r='50' fill='%236ee7b7'/%3E%3Cpath d='M70 280 Q150 220 230 280' fill='%236ee7b7'/%3E%3C/svg%3E" alt="Laurenz Polanski" class="team-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="font-display font-bold text-gray-900">Laurenz Polanski</h4>
+                            <p class="text-xs text-asf-navy font-semibold uppercase tracking-wide mb-1">IT Vorstand</p>
+                            <p class="text-xs text-gray-500">WI | Business Engineering @ digatus</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Member 4: Immanuel Zellmer -->
+                <div class="team-card reveal" style="transition-delay: 0.3s;">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-square overflow-hidden bg-gray-100">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23fce7f3' width='300' height='300'/%3E%3Ccircle cx='150' cy='120' r='50' fill='%23f9a8d4'/%3E%3Cpath d='M70 280 Q150 220 230 280' fill='%23f9a8d4'/%3E%3C/svg%3E" alt="Immanuel Zellmer" class="team-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="font-display font-bold text-gray-900">Immanuel Zellmer</h4>
+                            <p class="text-xs text-asf-navy font-semibold uppercase tracking-wide mb-1">Finanzvorstand</p>
+                            <p class="text-xs text-gray-500">BWL Bank | Stadtsparkasse München</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Member 5: Yazan Hamed -->
+                <div class="team-card reveal col-span-2 md:col-span-1" style="transition-delay: 0.4s;">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div class="aspect-square overflow-hidden bg-gray-100">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23e0e7ff' width='300' height='300'/%3E%3Ccircle cx='150' cy='120' r='50' fill='%23a5b4fc'/%3E%3Cpath d='M70 280 Q150 220 230 280' fill='%23a5b4fc'/%3E%3C/svg%3E" alt="Yazan Hamed" class="team-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="font-display font-bold text-gray-900">Yazan Hamed</h4>
+                            <p class="text-xs text-asf-navy font-semibold uppercase tracking-wide mb-1">Rechtsvorstand</p>
+                            <p class="text-xs text-gray-500">BWL Bank | Bayerische Landesbank</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WIKIFOLIO LIVE SECTION ==================== -->
+    <section id="wikifolio" class="py-24 bg-slate-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-600 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[120px]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Live Trading
+                    </div>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-6">Unser wikifolio<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">ASFPEV</span></h2>
+                    <p class="text-lg text-slate-300 mb-8 leading-relaxed">Verfolge unser aktives Investment-Portfolio in Echtzeit. Wir investieren gemeinsam, lernen aus unseren Entscheidungen.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="bg-white/5 backdrop-blur rounded-xl p-4 border border-white/10"><div class="text-3xl font-bold text-green-400">+12.4%</div><div class="text-sm text-slate-400">YTD Performance</div></div>
+                        <div class="bg-white/5 backdrop-blur rounded-xl p-4 border border-white/10"><div class="text-3xl font-bold text-blue-400">25+</div><div class="text-sm text-slate-400">Positionen</div></div>
+                    </div>
+                    <a href="https://www.wikifolio.com/de/de/w/wf00asfpev?src=search_top&searchTerm=ASF" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-xl font-bold transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-green-500/25"><i class="fas fa-external-link-alt"></i> Portfolio öffnen</a>
+                </div>
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <div class="wikifolio-container p-6 md:p-8">
+                        <div class="relative z-10">
+                            <iframe src="https://www.wikifolio.com/de/de/w/wf00asfpev/widget?size=large&layout=2&colorscheme=dark" width="100%" height="450" scrolling="no" frameborder="0" allowtransparency="true" title="wikifolio ASFPEV" class="rounded-xl" loading="lazy"></iframe>
+                            <noscript><div class="p-8 text-center text-white"><i class="fas fa-chart-line text-4xl mb-4 text-green-400"></i><p class="mb-4">wikifolio Widget</p><a href="https://www.wikifolio.com/de/de/w/wf00asfpev" target="_blank" class="text-green-400 underline">Hier klicken für Live-Daten</a></div></noscript>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 bg-gradient-to-br from-white via-blue-50 to-purple-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-30"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-asf-navy/10 to-asf-purple/10 rounded-full blur-[100px]"></div></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 reveal">
+            <!-- LOGO IM CTA AUCH ERSETZEN! -->
+            <img src="https://raw.githubusercontent.com/Enzeeeeeeeeee/ASF.github.io/main/logo.png" alt="ASF Logo" class="w-20 h-20 mx-auto mb-8 object-contain">
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Bereit durchzustarten?</h2>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">Schließe dich 200+ ambitionierten Studierenden an.<br>Für nur <strong class="text-asf-navy">2 EUR pro Monat</strong>.</p>
+            <button onclick="openModal('membershipModal')" class="btn-primary-new px-12 py-5 rounded-xl text-white font-bold text-xl inline-flex items-center gap-3 cursor-pointer"><i class="fas fa-arrow-right"></i> Jetzt Mitglied werden</button>
+            <p class="mt-6 text-sm text-gray-500"><i class="fas fa-lock mr-1"></i>Sichere Bezahlung | Jederzeit kündbar</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <!-- FOOTER LOGO AUCH ERSETZEN! -->
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="https://raw.githubusercontent.com/Enzeeeeeeeeee/ASF.github.io/main/logo.png" alt="ASF" class="h-10 w-auto">
+                        <span class="font-display font-bold text-xl">ASF e.V.</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed max-w-md">Academic Society of Finance – Der Finance Club an deiner Hochschule. Von Studenten für Studenten.</p>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-lg mb-4">Links</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a onclick="showPage('home')" class="hover:text-white transition cursor-pointer">Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition cursor-pointer">Über uns</a></li>
+                        <li><a href="#events" class="hover:text-white transition cursor-pointer">Events</a></li>
+                        <li><a href="#team" class="hover:text-white transition cursor-pointer">Team</a></li>
+                        <li><a onclick="openModal('membershipModal')" class="hover:text-white transition cursor-pointer">Mitglied werden</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-lg mb-4">Kontakt</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-envelope w-5"></i>info@as-finance.de</li>
+                        <li class="flex items-center gap-2"><i class="fab fa-linkedin w-5"></i><a href="#" class="hover:text-white transition">LinkedIn</a></li>
+                        <li class="flex items-center gap-2"><i class="fab fa-instagram w-5"></i><a href="#" class="hover:text-white transition">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>2024 Academic Society of Finance e.V.</p>
+                <div class="flex gap-6"><a href="#" class="hover:text-white transition">Impressum</a><a href="#" class="hover:text-white transition">Datenschutz</a></div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- ==================== ACADEMY PAGE ==================== -->
+<div id="academyPage" class="page">
+    <section class="pt-32 pb-20 bg-gradient-to-br from-asf-navy via-purple-900 to-slate-900 text-white relative overflow-hidden min-h-[60vh] flex items-center">
+        <div class="absolute inset-0 opacity-20"><div class="absolute top-10 left-10 w-96 h-96 bg-blue-500 rounded-full blur-[120px]"></div><div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-500 rounded-full blur-[120px]"></div></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm font-semibold mb-6"><i class="fas fa-graduation-cap"></i><span>ASF Academy</span></div>
+                <h1 class="font-display text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Basic Finance Knowledge<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">für Everybody</span></h1>
+                <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-2xl">Kein Vorwissen nötig! Lerne die Grundlagen Schritt für Schritt – kostenlos für ASF-Mitglieder.</p>
+                <div class="flex flex-wrap gap-4">
+                    <div class="bg-white/10 backdrop-blur rounded-xl px-6 py-3"><div class="text-2xl font-bold">6+</div><div class="text-sm text-white/60">Module</div></div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl px-6 py-3"><div class="text-2xl font-bold">30+</div><div class="text-sm text-white/60">Lektionen</div></div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl px-6 py-3"><div class="text-2xl font-bold">Kostenlos</div><div class="text-sm text-white/60">für Mitglieder</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-bold text-center text-gray-900 mb-12">Dein Lernpfad</h2>
+            <div class="space-y-4">
+                <div class="academy-module bg-gradient-to-r from-blue-50 to-white rounded-2xl p-6 border-l-4 border-blue-500 shadow-sm"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">01</div><div class="flex-grow"><h3 class="font-bold text-lg text-gray-900">Grundlagen der Finanzen</h3><p class="text-gray-600 text-sm">Was sind Finanzmärkte? Wie funktionieren Börsen?</p></div><i class="fas fa-chevron-right text-blue-300"></i></div></div>
+                <div class="academy-module bg-gradient-to-r from-indigo-50 to-white rounded-2xl p-6 border-l-4 border-indigo-500 shadow-sm"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">02</div><div class="flex-grow"><h3 class="font-bold text-lg text-gray-900">Aktien & Eigenkapital</h3><p class="text-gray-600 text-sm">Aktienanalyse, Dividenden, fundamentale Bewertung</p></div><i class="fas fa-chevron-right text-indigo-300"></i></div></div>
+                <div class="academy-module bg-gradient-to-r from-violet-50 to-white rounded-2xl p-6 border-l-4 border-violet-500 shadow-sm"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">03</div><div class="flex-grow"><h3 class="font-bold text-lg text-gray-900">Anleihen & Festverzinsliche</h3><p class="text-gray-600 text-sm">Staatsanleihen, Unternehmensanleihen, Zinsrisiken</p></div><i class="fas fa-chevron-right text-violet-300"></i></div></div>
+                <div class="academy-module bg-gradient-to-r from-purple-50 to-white rounded-2xl p-6 border-l-4 border-purple-500 shadow-sm"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">04</div><div class="flex-grow"><h3 class="font-bold text-lg text-gray-900">Investmentfonds & ETFs</h3><p class="text-gray-600 text-sm">Passives vs. aktives Management, Index-Investing</p></div><i class="fas fa-chevron-right text-purple-300"></i></div></div>
+                <div class="academy-module bg-gradient-to-r from-fuchsia-50 to-white rounded-2xl p-6 border-l-4 border-fuchsia-500 shadow-sm"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-fuchsia-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">05</div><div class="flex-grow"><h3 class="font-bold text-lg text-gray-900">Derivate & Hebelprodukte</h3><p class="text-gray-600 text-sm">Optionen, Futures, Zertifikate, Knock-Outs</p></div><i class="fas fa-chevron-right text-fuchsia-300"></i></div></div>
+                <div class="academy-module bg-gradient-to-r from-rose-50 to-white rounded-2xl p-6 border-l-4 border-rose-500 shadow-sm"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-rose-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">06</div><div class="flex-grow"><h3 class="font-bold text-lg text-gray-900">Portfoliotheorie & Risiko</h3><p class="text-gray-600 text-sm">Diversifikation, MPT, Beta, Alpha, Risikomanagement</p></div><i class="fas fa-chevron-right text-rose-300"></i></div></div>
+            </div>
+            <div class="mt-16 bg-gradient-to-r from-asf-navy to-asf-purple rounded-3xl p-8 md:p-12 text-white text-center">
+                <h3 class="font-display text-2xl md:text-3xl font-bold mb-4">Bereit zum Lernen?</h3>
+                <p class="text-white/80 mb-8 max-w-xl mx-auto">Die ASF Academy ist exklusiv für unsere Mitglieder.</p>
+                <button onclick="openModal('membershipModal')" class="bg-white text-asf-navy px-8 py-4 rounded-xl font-bold text-lg hover:-translate-y-1 transition-all hover:shadow-xl cursor-pointer">Mitglied werden & Zugang erhalten</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-12 bg-gray-50"><div class="max-w-7xl mx-auto px-4 text-center"><button onclick="showPage('home')" class="inline-flex items-center gap-2 text-asf-navy font-semibold hover:gap-4 transition-all cursor-pointer"><i class="fas fa-arrow-left"></i> Zurück zur Hauptseite</button></div></section>
+</div>
+
+<!-- MEMBERSHIP MODAL -->
+<div id="membershipModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <div class="bg-gradient-to-r from-asf-navy to-asf-blue p-6 md:p-8 text-white rounded-t-3xl relative">
+            <button onclick="closeModal('membershipModal')" class="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition" aria-label="Schließen"><i class="fas fa-times"></i></button>
+            <div class="flex items-center gap-4 mb-4">
+                <!-- MODAL LOGO AUCH ERSETZEN! -->
+                <img src="https://raw.githubusercontent.com/Enzeeeeeeeeee/ASF.github.io/main/logo.png" alt="ASF" class="w-12 h-12">
+                <div><h2 class="font-display text-2xl font-bold">Mitgliedsantrag</h2><p class="text-white/80 text-sm">Academic Society of Finance e.V.</p></div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 inline-flex items-center gap-4"><div><div class="text-sm text-white/70">Beitragsmodell</div><div class="flex items-baseline gap-1"><span class="text-3xl font-bold">2</span><span class="text-lg">EUR</span><span class="text-white/70">/ Monat</span></div></div><div class="text-sm text-white/60 pl-4 border-l border-white/20">Monatsweise per SEPA-Lastschrift</div></div>
+        </div>
+        <div class="p-6 md:p-8">
+            <form id="membershipForm" onsubmit="handleFormSubmit(event)">
+                <div class="mb-8"><h3 class="font-display font-bold text-lg text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-user text-asf-navy"></i> Persönliche Daten</h3><div class="grid md:grid-cols-2 gap-4"><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="firstName">Vorname *</label><input type="text" id="firstName" name="firstName" required class="form-input" placeholder="Max"></div><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="lastName">Nachname *</label><input type="text" id="lastName" name="lastName" required class="form-input" placeholder="Mustermann"></div></div><div class="grid md:grid-cols-2 gap-4 mt-4"><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="email">E-Mail *</label><input type="email" id="email" name="email" required class="form-input" placeholder="max@uni.de"></div><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="phone">Telefon</label><input type="tel" id="phone" name="phone" class="form-input" placeholder="+49 123 4567890"></div></div><div class="mt-4"><label class="block text-sm font-semibold text-gray-700 mb-1" for="birthDate">Geburtsdatum *</label><input type="date" id="birthDate" name="birthDate" required class="form-input"></div></div>
+                <div class="mb-8"><h3 class="font-display font-bold text-lg text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-university text-asf-purple"></i> Studieninformationen</h3><div class="grid md:grid-cols-2 gap-4"><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="university">Hochschule *</label><select id="university" name="university" required class="form-input form-select"><option value="">Bitte wählen...</option><option value="dhbw-mannheim">DHBW Mannheim</option><option value="dhbw-heilbronn">DHBW Heilbronn</option><option value="mannheim">Universität Mannheim</option><option value="heidelberg">Universität Heidelberg</option><option value="other">Andere</option></select></div><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="studyProgram">Studiengang *</label><select id="studyProgram" name="studyProgram" required class="form-input form-select"><option value="">Bitte wählen...</option><option value="bwl-bank">BWL Bank</option><option value="wi">Wirtschaftsinformatik</option><option value="bwl-general">BWL General</option><option value="engineering-business">Business Engineering</option><option value="other">Anderer Studiengang</option></select></div></div><div class="grid md:grid-cols-2 gap-4 mt-4"><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="semester">Semester *</label><select id="semester" name="semester" required class="form-input form-select"><option value="">Bitte wählen...</option><option value="1">1. Semester</option><option value="2">2. Semester</option><option value="3">3. Semester</option><option value="4">4. Semester</option><option value="5">5. Semester</option><option value="6">6. Semester</option><option value="7+">7. Semester oder höher</option></select></div><div><label class="block text-sm font-semibold text-gray-700 mb-1" for="matrikelNummer">Matrikelnummer</label><input type="text" id="matrikelNummer" name="matrikelNummer" class="form-input" placeholder="12345678"></div></div></div>
+                <div class="mb-8"><h3 class="font-display font-bold text-lg text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-heart text-asf-red"></i> Interessen</h3><div class="grid grid-cols-2 gap-3"><label class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"><input type="checkbox" name="interests[]" value="networking" class="w-5 h-5 text-asf-navy rounded"><span class="text-sm">Networking</span></label><label class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"><input type="checkbox" name="interests[]" value="events" class="w-5 h-5 text-asf-navy rounded"><span class="text-sm">Events besuchen</span></label><label class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"><input type="checkbox" name="interests[]" value="taskforce" class="w-5 h-5 text-asf-navy rounded"><span class="text-sm">Taskforce beitreten</span></label><label class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"><input type="checkbox" name="interests[]" value="investing" class="w-5 h-5 text-asf-navy rounded"><span class="text-sm">Investieren / Trading</span></label><label class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"><input type="checkbox" name="interests[]" value="academy" class="w-5 h-5 text-asf-navy rounded"><span class="text-sm">ASF Academy</span></label><label class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"><input type="checkbox" name="interests[]" value="career" class="w-5 h-5 text-asf-navy rounded"><span class="text-sm">Karriere-Coaching</span></label></div></div>
+                <div class="mb-8"><h3 class="font-display font-bold text-lg text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-credit-card text-green-600"></i> Zahlungsart</h3><div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-5"><div class="flex items-center justify-between"><div><div class="font-bold text-lg text-gray-900">Monatliche Abbuchung</div><div class="text-sm text-gray-600">2 EUR pro Monat via SEPA-Lastschrift</div><div class="text-xs text-gray-500 mt-1">Jederzeit mit 4 Wochen Frist zum Monatsende kündbar</div></div><div class="text-2xl font-bold text-asf-navy">2 €<span class="text-sm font-normal text-gray-500">/Mo</span></div></div></div>
+                <div class="mb-8"><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="terms" required class="w-5 h-5 text-asf-navy rounded mt-0.5"><span class="text-sm text-gray-600">Ich habe die <a href="#" class="text-asf-navy underline">Satzung</a> und <a href="#" class="text-asf-navy underline">Datenschutzerklärung</a> gelesen und akzeptiere diese. *</span></label></div>
+                <button type="submit" class="btn-primary-new w-full py-4 rounded-xl text-white font-bold text-lg"><i class="fas fa-paper-plane mr-2"></i> Antrag absenden</button>
+                <p class="text-center text-sm text-gray-500 mt-4"><i class="fas fa-lock mr-1"></i> Deine Daten sind bei uns sicher</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div id="successToast" class="fixed bottom-8 right-8 bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[200] flex items-center gap-3"><i class="fas fa-check-circle text-2xl"></i><div><div class="font-bold">Antrag erfolgreich!</div><div class="text-sm text-green-100">Wir melden uns bald bei dir.</div></div></div>
+
+<script>
+    // ===== INITIALIZATION =====
+    const menuBtn = document.getElementById('menuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navbar = document.getElementById('navbar');
+    const homePage = document.getElementById('homePage');
+    const academyPage = document.getElementById('academyPage');
+    
+    // ===== PAGE NAVIGATION SYSTEM =====
+    function showPage(pageName) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        
+        // Show selected page
+        if (pageName === 'home') {
+            homePage.classList.add('active');
+        } else if (pageName === 'academy') {
+            academyPage.classList.add('active');
+        }
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Update navigation active states
+        document.querySelectorAll('.nav-link-light').forEach(link => {
+            link.classList.remove('active');
+            const linkText = link.textContent.toLowerCase();
+            if ((pageName === 'home' && (linkText.includes('home'))) ||
+                (pageName === 'academy' && linkText.includes('academy'))) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    function closeMobileMenu() { 
+        if (mobileMenu) mobileMenu.classList.remove('active'); 
+    }
+    
+    // Mobile Menu Events
+    if (menuBtn && mobileMenu && closeMenuBtn) {
+        menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+        document.querySelectorAll('.mobile-menu a').forEach(l => l.addEventListener('click', closeMobileMenu));
+    }
+    
+    // ===== MODAL FUNCTIONS =====
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) { 
+            modal.style.display = 'flex'; 
+            requestAnimationFrame(() => modal.classList.add('active')); 
+            document.body.style.overflow = 'hidden'; 
+        }
+    }
+    
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) { 
+            modal.classList.remove('active'); 
+            setTimeout(() => modal.style.display = 'none', 300); 
+            document.body.style.overflow = ''; 
+        }
+    }
+    
+    // Close modal on overlay click or Escape
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(modal.id); });
+    });
+    
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+    });
+    
+    // ===== FORM HANDLER =====
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        console.log('Form submitted:', Object.fromEntries(new FormData(e.target)));
+        closeModal('membershipModal');
+        
+        const toast = document.getElementById('successToast');
+        if (toast) { 
+            toast.style.transform = 'translateY(0)'; 
+            toast.style.opacity = '1'; 
+            setTimeout(() => { 
+                toast.style.transform = 'translateY(20px)'; 
+                toast.style.opacity = '0'; 
+            }, 4000); 
+        }
+        
+        e.target.reset();
+    }
+    
+    // ===== SCROLL EFFECTS =====
+    window.addEventListener('scroll', () => { 
+        if (navbar) navbar.style.boxShadow = window.scrollY > 50 ? '0 4px 20px rgba(0,0,0,0.08)' : 'none'; 
+    });
+    
+    // ===== REVEAL ANIMATIONS =====
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    
+    // ===== REDUCED MOTION =====
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+    }
+    
+    console.log('ASF v5.0 loaded - DEBUGGED VERSION!');
+    console.log('Features: Working Nav | Academy Page | Portfolio Link | Easy-Swap Logos');
+</script>
+</body>
+</html>
